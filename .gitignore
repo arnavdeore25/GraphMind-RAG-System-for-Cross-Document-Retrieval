@@ -1,0 +1,8 @@
+.env
+.env.example
+__pycache__/config.cpython-314.pyc
+__pycache__/loaders.cpython-314.pyc
+/__pycache__
+db/chroma_db/3d9ac772-53f9-468d-a705-f6456ddfa412/length.bin
+/db
+/source
