@@ -1,0 +1,6 @@
+[
+  {"question": "Which organization funded the author of paper X, and what else did that organization fund?",
+   "answer": "Reference answer here",
+   "gold_sources": ["paper_x.pdf", "annual_report.pdf"],
+   "hops": 2}
+]
