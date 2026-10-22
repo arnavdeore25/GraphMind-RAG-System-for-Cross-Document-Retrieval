@@ -26,9 +26,9 @@ class GraphStore:
     def close(self):
         self.driver.close()
 
-    def _run(self, q, **params):
+    def _run(self, cypher, **params):
         with self.driver.session() as s:
-            return [r.data() for r in s.run(q, **params)]
+            return [r.data() for r in s.run(cypher, **params)]
 
     def setup(self):
         self._run("CREATE CONSTRAINT chunk_id IF NOT EXISTS FOR (c:Chunk) REQUIRE c.id IS UNIQUE")
