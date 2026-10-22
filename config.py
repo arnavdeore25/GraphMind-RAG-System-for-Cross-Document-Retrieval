@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
-LLM_MODEL = "gemini-flash-latest"
+LLM_MODEL = "gemini-flash-lite-latest"
 EMBED_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
 
 SOURCE_DIR = "source"
