@@ -57,6 +57,7 @@ class ChatSession:
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--mode", default="hybrid", choices=["vector", "graph", "hybrid"])
+    ap.add_argument("--debug", action="store_true")
     args = ap.parse_args()
     s = ChatSession(args.mode)
     print(f"GraphMind [{args.mode}] - type 'quit' to exit")
@@ -66,6 +67,13 @@ def main():
             break
         ans, r, sq = s.ask(q)
         print(f"\n(standalone: {sq}) | retrieval {r.latency:.2f}s")
+        if args.debug:
+            print("\n[debug]", r.debug)
+            print(f"[debug] {len(r.triples)} graph triples used")
+            for t in r.triples[:10]:
+                print(f"   {t['head']} --{t['rel']}--> {t['tail']}  ({t['source']})")
+            for i, c in enumerate(r.chunks, 1):
+                print(f"   chunk [{i}] {c['source']} via {c['via']}: {c['text'][:80]!r}")
         print("\n" + ans)
         print("\nSources:")
         for i, c in enumerate(r.chunks, 1):
