@@ -14,6 +14,7 @@ class Retrieved:
     chunks: list = field(default_factory=list)   # [{chunk_id, source, text, via}]
     triples: list = field(default_factory=list)  # [{head, rel, tail, chunk_id, source}]
     latency: float = 0.0
+    debug: dict = field(default_factory=dict)
 
 
 def rrf(rank_lists, k=60):
@@ -51,17 +52,23 @@ class Retriever:
         t0 = time.perf_counter()
         via = {}
         triples = []
+        dbg = {}
         if mode == "vector":
             ids = self._vector(query, k)
             via = {i: "vector" for i in ids}
         elif mode == "graph":
-            seeds = self.graph.find_entities(extract_query_entities(query))
+            qents = extract_query_entities(query)
+            seeds = self.graph.find_entities(qents)
+            dbg.update(query_entities=qents, linked_seeds=seeds)
             ids, triples = self._graph(seeds, hops, k)
             via = {i: "graph" for i in ids}
         elif mode == "hybrid":
             vec_ids = self._vector(query, k)
-            seeds = self.graph.find_entities(extract_query_entities(query))
-            seeds += self.graph.entities_of_chunks(vec_ids)      # expand from vector hits too
+            qents = extract_query_entities(query)
+            seeds = self.graph.find_entities(qents)
+            from_vec = self.graph.entities_of_chunks(vec_ids)
+            dbg.update(query_entities=qents, linked_seeds=list(seeds), seeds_from_vector_hits=from_vec)
+            seeds += from_vec                                    # expand from vector hits too
             graph_ids, triples = self._graph(list(dict.fromkeys(seeds)), hops, k)
             ids = rrf([vec_ids, graph_ids])[:k + 3]
             via = {i: ("both" if i in vec_ids and i in graph_ids else "vector" if i in vec_ids else "graph") for i in ids}
@@ -73,4 +80,4 @@ class Retriever:
             c["via"] = via.get(c["chunk_id"], mode)
         kept = {c["chunk_id"] for c in chunks}
         triples = [t for t in triples if t["chunk_id"] in kept][:25]  # only facts we can cite
-        return Retrieved(mode, chunks, triples, time.perf_counter() - t0)
+        return Retrieved(mode, chunks, triples, time.perf_counter() - t0, dbg)
