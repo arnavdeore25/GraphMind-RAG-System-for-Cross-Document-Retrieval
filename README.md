@@ -131,6 +131,15 @@ eval_set.example.json Example evaluation questions
 docker-compose.yml    Local Neo4j service
 ```
 
+## Limitations
+
+- Answer quality depends on the source documents, retrieval results, and Gemini's extraction and generation. Extracted entities or relationships may be incomplete or incorrect.
+- Graph retrieval relies on matching named entities in the question to entities extracted during ingestion. Entity name variations can make graph connections harder to find.
+- The current loaders support the file types listed above; scanned PDFs and other formats may need preprocessing or additional loaders.
+- The chat interface is command-line based, and the vector index and graph store are local services rather than a hosted, multi-user deployment.
+- Evaluation uses a Gemini judge and a manually prepared evaluation set. Scores can vary with the judge and may not capture every aspect of answer quality.
+
+
 ## Notes
 
 - Keep `.env` private; it contains your API key and service credentials.
