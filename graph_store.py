@@ -6,9 +6,12 @@ Schema
   (:Chunk)-[:MENTIONS]->(:Entity)
   (:Entity)-[:RELATED {type, chunk_id, source}]->(:Entity)   # one edge per piece of evidence
 """
+import logging
 import re
 from neo4j import GraphDatabase
 from config import NEO4J_URI, NEO4J_USER, NEO4J_PASSWORD
+
+logging.getLogger("neo4j.notifications").setLevel(logging.ERROR)
 
 
 def norm(name: str) -> str:
