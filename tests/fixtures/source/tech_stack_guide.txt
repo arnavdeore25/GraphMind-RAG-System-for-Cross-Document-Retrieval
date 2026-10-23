@@ -1,0 +1,9 @@
+Technical guide for participants
+
+Cyber Security track: the Phishing Detection Tool project must use zero-knowledge proofs
+for credential verification.
+
+Sustainability track: for solar power output forecasting, a random forest or an LSTM
+time-series model is recommended.
+
+Fintech track: sentiment analysis of market news works well with transformer-based classifiers.

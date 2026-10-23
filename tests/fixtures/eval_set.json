@@ -1,0 +1,8 @@
+[
+  {"question": "Who is the assigned mentor of team ZeroProof?", "answer": "Dr. Meera Iyer", "gold_sources": ["teams.csv"], "hops": 1},
+  {"question": "What is the first prize for the Education track?", "answer": "40,000 rupees, funded by LearnBridge Foundation", "gold_sources": ["sponsors_and_prizes.txt"], "hops": 1},
+  {"question": "What is the expertise of the mentor assigned to the team building the Phishing Detection Tool?", "answer": "Dr. Meera Iyer, whose expertise is applied cryptography and zero-knowledge proofs", "gold_sources": ["teams.csv", "mentors.csv"], "hops": 2},
+  {"question": "Which company sponsors the track of the team working on the stock market sentiment tracker, and what is that track's first prize?", "answer": "FinEdge Technologies sponsors the Fintech track; first prize is 50,000 rupees", "gold_sources": ["teams.csv", "sponsors_and_prizes.txt"], "hops": 2},
+  {"question": "Which organization employs the mentor of team SolarSense, and what model does the tech guide suggest for their problem?", "answer": "GreenGrid Energy employs Kavita Rao; the guide suggests a random forest or LSTM time-series model", "gold_sources": ["teams.csv", "mentors.csv", "tech_stack_guide.txt"], "hops": 3},
+  {"question": "Where are the office hours of the mentor for the team that must use zero-knowledge proofs, and which company sponsors that team's track?", "answer": "Room A101 (Dr. Meera Iyer); CyberShield Labs sponsors the Cyber Security track", "gold_sources": ["tech_stack_guide.txt", "teams.csv", "mentors.csv", "sponsors_and_prizes.txt"], "hops": 3}
+]
