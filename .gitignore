@@ -6,3 +6,5 @@ __pycache__/loaders.cpython-314.pyc
 db/chroma_db/3d9ac772-53f9-468d-a705-f6456ddfa412/length.bin
 /db
 /source
+/source_backup
+/tests/__pycache__
